@@ -6,7 +6,7 @@ class DualAxisTrackerMount(pvsystem.AbstractMount):
         # no rotation limits, no backtracking
         return {'surface_tilt': solar_zenith, 'surface_azimuth': solar_azimuth}
         
-#latitude and longitude for Hyderabad location
+#latitude and longitude for Hyderabad location.
 loc = location.Location(17.3, 78.4)
 
 array = pvsystem.Array(
