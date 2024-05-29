@@ -5,8 +5,10 @@ class DualAxisTrackerMount(pvsystem.AbstractMount):
     def get_orientation(self, solar_zenith, solar_azimuth):
         # no rotation limits, no backtracking
         return {'surface_tilt': solar_zenith, 'surface_azimuth': solar_azimuth}
-
+        
+#latitude and longitude for Hyderabad location
 loc = location.Location(17.3, 78.4)
+
 array = pvsystem.Array(
     #The previously defined dual-axis tracker.
     mount=DualAxisTrackerMount(),
