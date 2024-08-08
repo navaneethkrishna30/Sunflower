@@ -69,14 +69,14 @@ async def angles(data: AnglesRequest):
 
     # Round off to nearest integer
     azimuth_np_array = np.round(np.array(sun_pos['azimuth'].tolist())).astype(int)
-    elevation_np_array = np.round(np.array(sun_pos['elevation'].tolist())).astype(int)
+    zenith_np_array = np.round(np.array(sun_pos['zenith'].tolist())).astype(int)
     
     azimuth = azimuth_np_array.tolist()
-    elevation = elevation_np_array.tolist()
+    zenith = zenith_np_array.tolist()
     
     # Response
     response = {
-        'elevation': elevation,
+        'zenith': zenith,
         'azimuth': azimuth
     }
 
