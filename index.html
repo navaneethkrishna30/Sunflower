@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunflower API Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sunflower API Demo</h1>
+
+    <h2>Sunrise and Sunset</h2>
+    <form id="sunrise-sunset-form">
+      <input type="number" id="latitude" placeholder="Latitude" required />
+      <input type="number" id="longitude" placeholder="Longitude" required />
+      <input type="text" id="timezone" placeholder="Timezone (e.g., Asia/Kolkata)" required />
+      <input type="date" id="date" required />
+      <button type="button" onclick="getSunriseSunset()">Get Sunrise and Sunset</button>
+    </form>
+    <textarea id="sunrise-sunset-result" readonly placeholder="Results will appear here..."></textarea>
+
+    <h2>Angles</h2>
+    <form id="angles-form">
+      <input type="number" id="latitude-angle" placeholder="Latitude" required />
+      <input type="number" id="longitude-angle" placeholder="Longitude" required />
+      <input type="text" id="timezone-angle" placeholder="Timezone (e.g., Asia/Kolkata)" required />
+      <input type="date" id="date-angle" required />
+      <input type="text" id="sunrise" placeholder="Sunrise (e.g., 2025-01-11 09:15:40)" required />
+      <input type="text" id="sunset" placeholder="Sunset (e.g., 2025-01-11 18:32:30)" required />
+      <button type="button" onclick="getAngles()">Get Angles</button>
+    </form>
+    <textarea id="angles-result" readonly placeholder="Results will appear here..."></textarea>
+  </div>
+
+  <script>
+    const apiUrl = "https://api-sunflower.web.app"; // API URL
+
+    async function getSunriseSunset() {
+      const latitude = document.getElementById('latitude').value;
+      const longitude = document.getElementById('longitude').value;
+      const timezone = document.getElementById('timezone').value;
+      const date = document.getElementById('date').value;
+
+      try {
+        const response = await fetch(`${apiUrl}/sunrise-and-sunset`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ latitude, longitude, timezone, date })
+        });
+        const result = await response.json();
+        document.getElementById('sunrise-sunset-result').value = JSON.stringify(result, null, 2);
+      } catch (error) {
+        document.getElementById('sunrise-sunset-result').value = `Error: ${error.message}`;
+      }
+    }
+
+    async function getAngles() {
+      const latitude = document.getElementById('latitude-angle').value;
+      const longitude = document.getElementById('longitude-angle').value;
+      const timezone = document.getElementById('timezone-angle').value;
+      const date = document.getElementById('date-angle').value;
+      const sunrise = document.getElementById('sunrise').value;
+      const sunset = document.getElementById('sunset').value;
+
+      try {
+        const response = await fetch(`${apiUrl}/angles`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ latitude, longitude, timezone, date, sunrise, sunset })
+        });
+        const result = await response.json();
+        document.getElementById('angles-result').value = JSON.stringify(result, null, 2);
+      } catch (error) {
+        document.getElementById('angles-result').value = `Error: ${error.message}`;
+      }
+    }
+  </script>
+</body>
+</html>
