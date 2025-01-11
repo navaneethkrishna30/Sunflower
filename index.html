@@ -55,13 +55,14 @@
   </div>
 
   <script>
-    const apiUrl = "https://api-sunflower.web.app"; // API URL
+    const apiUrl = "https://your-api-endpoint.com"; // Replace with your actual API base URL
 
     async function getSunriseSunset() {
       const latitude = document.getElementById('latitude').value;
       const longitude = document.getElementById('longitude').value;
       const timezone = document.getElementById('timezone').value;
-      const date = document.getElementById('date').value;
+      const dateInput = document.getElementById('date').value;
+      const date = dateInput.replace(/-/g, '/');
 
       try {
         const response = await fetch(`${apiUrl}/sunrise-and-sunset`, {
@@ -80,7 +81,8 @@
       const latitude = document.getElementById('latitude-angle').value;
       const longitude = document.getElementById('longitude-angle').value;
       const timezone = document.getElementById('timezone-angle').value;
-      const date = document.getElementById('date-angle').value;
+      const dateInput = document.getElementById('date-angle').value;
+      const date = dateInput.replace(/-/g, '/');
       const sunrise = document.getElementById('sunrise').value;
       const sunset = document.getElementById('sunset').value;
 
